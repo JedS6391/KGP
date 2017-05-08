@@ -8,19 +8,24 @@ enum class TreeGenerationMode {
     RampedHalfAndHalf
 }
 
-data class TreeGeneratorOptions(val maxDepth: Int, val numFeatures: Int, val constants: List<Double>)
+data class TreeGeneratorOptions(
+        val maxDepth: Int,
+        val numFeatures: Int,
+        val mode: TreeGenerationMode,
+        val constants: List<Double>
+)
 
 class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOptions) {
 
     val random = Random()
 
-    fun generateTree(mode: TreeGenerationMode): Tree {
+    fun generateTree(): Tree {
         // Start the tree with a function to prevent degenerate trees.
         val root = this.random.choice(this.functions)
 
         val tree = Tree(mutableListOf(root))
 
-        return when (mode) {
+        return when (this.options.mode) {
             TreeGenerationMode.Grow -> this.grow(tree)
             TreeGenerationMode.Full -> this.full(tree)
             TreeGenerationMode.RampedHalfAndHalf -> this.rampedHalfAndHalf(tree)
@@ -92,9 +97,9 @@ class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOpt
                 val idx = this.random.nextInt(this.options.numFeatures + 1)
 
                 val node = if (idx == this.options.numFeatures) {
-                    Input(idx)
-                } else {
                     Constant(this.random.choice(this.options.constants))
+                } else {
+                    Input(idx)
                 }
 
                 tree.nodes.add(node)
@@ -125,26 +130,9 @@ class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOpt
     }
 }
 
-class Tree(val nodes: MutableList<Node>) {
+class Tree(var nodes: MutableList<Node>) {
 
-    fun isValid(): Boolean {
-        val terminals = mutableListOf(0)
-
-        this.nodes.forEach { node ->
-            if (node is Function) {
-                terminals.add(node.arity)
-            } else {
-                terminals[terminals.lastIndex] -= 1
-
-                while (terminals.last() == 0) {
-                    terminals.removeAt(terminals.lastIndex)
-                    terminals[terminals.lastIndex] -= 1
-                }
-            }
-        }
-
-        return terminals == listOf(-1)
-    }
+    var fitness = 0.0
 
     fun execute(case: List<Double>): Double {
         val stack = mutableListOf<MutableList<Node>>()
@@ -179,6 +167,61 @@ class Tree(val nodes: MutableList<Node>) {
         }
 
         throw Exception("Failed to execute tree.")
+    }
+
+    fun copy(): Tree {
+        return Tree(this.nodes.map { n -> n }.toMutableList())
+    }
+
+    internal fun getRandomSubtree(): Pair<Int, Int> {
+        val random = Random()
+
+        val probs = this.nodes.map { n ->
+            when (n) {
+                is Function -> 0.9
+                else        -> 0.1
+            }
+        }
+
+        val normalised = probs.map { p ->
+            p / probs.sum()
+        }.cumulativeSum()
+
+        var stack = 1
+        val start = normalised.insertionPoint(random.nextDouble())
+        var end = start
+
+        while (stack > (end - start)) {
+            val node = this.nodes[end]
+
+            stack += (node as? Function)?.arity ?: 0
+            end += 1
+        }
+
+        return Pair(start, end)
+    }
+
+    fun crossover(other: Tree) {
+        // Subtree from ourselves
+        val (start, end) = this.getRandomSubtree()
+        val removed = start..end
+
+        // Subtree from other
+        val (otherStart, otherEnd) = other.getRandomSubtree()
+        val otherRemoved = ((0..other.nodes.size).toSet() - (otherStart..otherEnd).toSet()).toList()
+
+        // Transfer genetic material from other tree.
+        this.nodes = (this.nodes.subList(0, start) +
+                     other.nodes.subList(otherStart, otherEnd) +
+                     this.nodes.subList(end, this.nodes.size)).toMutableList()
+    }
+
+    fun subtreeMutation() {
+
+    }
+
+    fun pointMutation() {
+
     }
 
     override fun toString(): String {
@@ -221,4 +264,31 @@ class Tree(val nodes: MutableList<Node>) {
 
 fun <T> Random.choice(list: List<T>): T {
     return list[(this.nextDouble() * list.size).toInt()]
+}
+
+fun List<Double>.cumulativeSum(): List<Double> {
+    var total = 0.0
+
+    return this.map { v ->
+        total += v
+
+        total
+    }
+}
+
+fun List<Double>.insertionPoint(value: Double): Int {
+    var low = 0
+    var high = this.size
+
+    while (low < high) {
+        // Use bit-shift instead of divide by 2.
+        val middle = (low + high) ushr 1
+
+        when {
+            value <= this[middle] -> high = middle
+            else                  -> low = middle + 1
+        }
+    }
+
+    return low
 }
