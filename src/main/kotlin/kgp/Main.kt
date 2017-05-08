@@ -1,5 +1,6 @@
 package main.kotlin.kgp
 
+import main.kotlin.kgp.fitness.*
 import main.kotlin.kgp.tree.*
 
 class Main {
@@ -14,28 +15,38 @@ class Main {
                     Nodes.Multiplication()
             ).toList()
 
-            val cases = listOf(
-                    listOf(-10.0, 82.0),
-                    listOf(-9.5, 73.25)
+            val caseLoaderOptions = CsvCaseLoaderOptions(
+                    filename = "/Users/jedsimson/Desktop/simple.csv",
+                    numFeatures = 1
             )
 
-            val options = TreeGeneratorOptions(
+            val caseLoader = CsvCaseLoader(caseLoaderOptions)
+            val cases = caseLoader.loadCases()
+
+            val genOptions = TreeGeneratorOptions(
                     maxDepth = 5,
                     numFeatures = 1,
                     constants = listOf(0.0, 1.0, 2.0)
             )
-            val treeGen = TreeGenerator(functions, options)
+            val treeGen = TreeGenerator(functions, genOptions)
 
             val tree = treeGen.generateTree(TreeGenerationMode.Grow)
+
+            val mse = Metric(function = { cases, outputs ->
+                val se = cases.zip(outputs).map { (expected, predicted) ->
+                    Math.pow((predicted - expected.output), 2.0)
+                }.sum()
+
+                ((1.0 / cases.size.toDouble()) * se)
+            })
 
             println(tree)
 
             if (tree.isValid()) {
-                cases.map { case ->
-                    val result = tree.execute(case)
+                val outputs = cases.map { (features) -> tree.execute(features.map(Feature::value)) }
+                val fitness = mse.fitness(cases, outputs)
 
-                    println(result)
-                }
+                println("Fitness (MSE): $fitness")
             } else {
                 println("Invalid tree...")
             }
