@@ -23,7 +23,7 @@ class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOpt
         // Start the tree with a function to prevent degenerate trees.
         val root = this.random.choice(this.functions)
 
-        val tree = Tree(mutableListOf(root))
+        val tree = Tree(mutableListOf(root), this)
 
         return when (this.options.mode) {
             TreeGenerationMode.Grow -> this.grow(tree)
@@ -130,11 +130,18 @@ class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOpt
     }
 }
 
-class Tree(var nodes: MutableList<Node>) {
+class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
 
-    var fitness = 0.0
+    var fitness = 1e9
 
     fun execute(case: List<Double>): Double {
+        val node = this.nodes.first()
+
+        when (node) {
+            is Constant -> return node.value
+            is Input    -> return case[node.index]
+        }
+
         val stack = mutableListOf<MutableList<Node>>()
 
         for (node in this.nodes) {
@@ -170,7 +177,7 @@ class Tree(var nodes: MutableList<Node>) {
     }
 
     fun copy(): Tree {
-        return Tree(this.nodes.map { n -> n }.toMutableList())
+        return Tree(this.nodes.map { n -> n }.toMutableList(), this.treeGenerator)
     }
 
     internal fun getRandomSubtree(): Pair<Int, Int> {
@@ -216,12 +223,14 @@ class Tree(var nodes: MutableList<Node>) {
                      this.nodes.subList(end, this.nodes.size)).toMutableList()
     }
 
-    fun subtreeMutation() {
+    fun pointMutation() {
 
     }
 
-    fun pointMutation() {
+    fun subtreeMutation() {
+        val other = this.treeGenerator.generateTree()
 
+        this.crossover(other)
     }
 
     override fun toString(): String {

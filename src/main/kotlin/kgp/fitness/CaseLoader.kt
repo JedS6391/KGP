@@ -25,6 +25,7 @@ class CsvCaseLoader(val options: CsvCaseLoaderOptions) : CaseLoader {
                     name = header[idx]
                 )
             }
+
             val output = line.last().toDouble()
 
             Case(features, output)
