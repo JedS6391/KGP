@@ -180,10 +180,10 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         return Tree(this.nodes.map { n -> n }.toMutableList(), this.treeGenerator)
     }
 
-    internal fun getRandomSubtree(): Pair<Int, Int> {
+     internal fun getRandomSubtree(program: List<Node> = this.nodes): Pair<Int, Int> {
         val random = Random()
 
-        val probs = this.nodes.map { n ->
+        val probs = program.map { n ->
             when (n) {
                 is Function -> 0.9
                 else        -> 0.1
@@ -199,7 +199,7 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         var end = start
 
         while (stack > (end - start)) {
-            val node = this.nodes[end]
+            val node = program[end]
 
             stack += (node as? Function)?.arity ?: 0
             end += 1
@@ -211,26 +211,87 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
     fun crossover(other: Tree) {
         // Subtree from ourselves
         val (start, end) = this.getRandomSubtree()
-        val removed = start..end
 
         // Subtree from other
         val (otherStart, otherEnd) = other.getRandomSubtree()
-        val otherRemoved = ((0..other.nodes.size).toSet() - (otherStart..otherEnd).toSet()).toList()
 
         // Transfer genetic material from other tree.
-        this.nodes = (this.nodes.subList(0, start) +
-                     other.nodes.subList(otherStart, otherEnd) +
-                     this.nodes.subList(end, this.nodes.size)).toMutableList()
+        this.nodes = (
+                this.nodes.subList(0, start) +
+                other.nodes.subList(otherStart, otherEnd) +
+                this.nodes.subList(end, this.nodes.size)
+        ).toMutableList()
     }
 
-    fun pointMutation() {
+    fun pointMutation(replacementRate: Double) {
+        val nodes = this.copy().nodes
+        val random = Random()
+        val options = this.treeGenerator.options
 
+        // Get nodes to modify
+        val mutate = (0..nodes.size - 1).map { idx ->
+            val replace = random.nextDouble() < replacementRate
+
+            Pair(idx, replace)
+        }.filter { (_, replace) ->
+            replace
+        }.map { (idx, _) ->
+            idx
+        }
+
+
+        mutate.map { node ->
+            when (this.nodes[node]) {
+                is Function -> {
+                    // Find another function with the same arity
+                    val arity = this.nodes[node].arity
+
+                    val replacements = this.treeGenerator.functions.filter { func ->
+                        func.arity == arity
+                    }
+
+                    val replacement = random.choice(replacements)
+
+                    this.nodes[node] = replacement
+                }
+                else -> {
+                    // Terminal
+                    val idx = random.nextInt(options.numFeatures + 1)
+
+                    val term = if (idx == options.numFeatures) {
+                        // Add small amount of noise to a constant
+                        Constant(random.choice(options.constants) + random.nextGaussian())
+                    } else {
+                        Input(idx)
+                    }
+
+                    this.nodes[node] = term
+                }
+            }
+        }
     }
 
     fun subtreeMutation() {
         val other = this.treeGenerator.generateTree()
 
         this.crossover(other)
+    }
+
+    fun hoistMutation() {
+        // Find a subtree to replace
+        val (start, end) = this.getRandomSubtree()
+
+        val subtree = this.nodes.subList(start, end)
+
+        // Get a subtree of the subtree to hoist
+        val (subStart, subEnd) = this.getRandomSubtree(subtree)
+        val hoist = subtree.subList(subStart, subEnd)
+
+        this.nodes = (
+            this.nodes.subList(0, start) +
+            hoist +
+            this.nodes.subList(end, this.nodes.size)
+        ).toMutableList()
     }
 
     override fun toString(): String {

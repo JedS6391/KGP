@@ -11,8 +11,8 @@ import java.util.*
 
 interface Model {
     var population: MutableList<Tree>
-    fun initialise()
-    fun evolve(): Tree
+    fun train(cases: Cases)
+    fun test(cases: Cases): List<Double>
 }
 
 data class EvolutionOptions(
@@ -20,60 +20,78 @@ data class EvolutionOptions(
         val generations: Int,
         val tournamentSize: Int,
         val crossoverRate: Double,
+        val subtreeMutationRate: Double,
+        val hoistMutationRate: Double,
+        val pointMutationRate: Double,
+        val pointReplacementRate: Double,
         val numOffspring: Int,
         val functionSet: List<Function>,
         val treeGeneratorOptions: TreeGeneratorOptions,
-        val fitnessCases: Cases,
-        val metric: Metric
+        val metric: Metric,
+        val stoppingCriterion: Double
 )
 
 class BaseModel(val options: EvolutionOptions) : Model {
 
-    override var population: MutableList<Tree> = mutableListOf()
+    override var population = mutableListOf<Tree>()
     private val generator = TreeGenerator(this.options.functionSet, this.options.treeGeneratorOptions)
     private val selector = TournamentSelection(this.options.tournamentSize)
     private val random = Random()
 
-    override fun initialise() {
+    lateinit var best: Tree
+
+    private fun initialise() {
         (0..this.options.populationSize).forEach {
             this.population.add(this.generator.generateTree())
         }
     }
 
-    override fun evolve(): Tree {
+    override fun train(cases: Cases) {
+        this.initialise()
+
         // Determine initial fitness values for population.
         // Assumes that the population has already been initialised.
         this.population.forEach { tree ->
-            val outputs = this.options.fitnessCases.map { (features) ->
+            val outputs = cases.map { (features) ->
                 tree.execute(features.map(Feature::value))
             }
 
-            tree.fitness = this.options.metric.fitness(this.options.fitnessCases, outputs)
+            tree.fitness = this.options.metric.fitness(cases, outputs)
         }
 
         // Sort population so that the fittest individual is first.
         this.population = this.population.sortedBy(Tree::fitness).toMutableList()
+        this.best = this.population.first()
 
         (0..this.options.generations).forEach { gen ->
+            /*
+            if (this.best.fitness < this.options.stoppingCriterion) {
+                return
+            }
+            */
+
             // Choose some individuals for the next population
             (0..this.options.numOffspring).forEach {
                 val individual = this.selector.tournament(this.population).copy()
 
-                if (this.random.nextDouble() < this.options.crossoverRate) {
+                // Dispatch mutation
+                when {
+                    this.random.nextDouble() < this.options.crossoverRate -> {
+                        val other = this.selector.tournament(this.population).copy()
 
-                    val other = this.selector.tournament(this.population).copy()
-
-                    individual.crossover(other)
+                        individual.crossover(other)
+                    }
+                    this.random.nextDouble() < this.options.subtreeMutationRate -> individual.subtreeMutation()
+                    this.random.nextDouble() < this.options.hoistMutationRate   -> individual.hoistMutation()
+                    this.random.nextDouble() < this.options.pointMutationRate   -> individual.pointMutation(this.options.pointReplacementRate)
                 }
 
-                individual.subtreeMutation()
-
                 // Evaluate this individual
-                val outputs = this.options.fitnessCases.map { (features) ->
+                val outputs = cases.map { (features) ->
                     individual.execute(features.map(Feature::value))
                 }
 
-                individual.fitness = this.options.metric.fitness(this.options.fitnessCases, outputs)
+                individual.fitness = this.options.metric.fitness(cases, outputs)
 
                 // Choose a member of the existing population to replace with this new individual.
                 // TODO: Make selector return index of tournament winner/loser.
@@ -84,13 +102,18 @@ class BaseModel(val options: EvolutionOptions) : Model {
             }
 
             this.population = this.population.sortedBy(Tree::fitness).toMutableList()
+            this.best = this.population.first()
 
-            println("Generation #$gen\t Best Fitness: ${this.population.first().fitness}")
+            println("Generation #$gen\t Best Fitness: ${this.best.fitness}\t Best Length: ${this.best.nodes.size}")
         }
 
         this.population = this.population.sortedBy(Tree::fitness).toMutableList()
-
-        return this.population.first()
+        this.best = this.population.first()
     }
 
+    override fun test(cases: Cases): List<Double> {
+        return cases.map { (features) ->
+            this.best.execute(features.map(Feature::value))
+        }
+    }
 }
