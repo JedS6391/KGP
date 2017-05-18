@@ -2,12 +2,35 @@ package main.kotlin.kgp.tree
 
 import java.util.*
 
+/**
+ * Represents the different types of tree generation methods.
+ *
+ * [Grow] mode will generate trees with nodes chosen randomly from
+ * the union of the function and terminal sets, allowing trees that are
+ * smaller than the max depth to be created. This method generally produces
+ * asymmetric trees.
+ *
+ * [Full] mode will generates tree with nodes chosen from the function set,
+ * until the maximum depth is reached when it will start choosing from the
+ * terminal set. This tends to grow "bushy" symmetrical trees.
+ *
+ * [HalfAndHalf] mode will use a 50/50 combination of the full and grow modes,
+ * meaning the trees in the initial population will have a mix of shapes.
+ */
 enum class TreeGenerationMode {
     Grow,
     Full,
-    RampedHalfAndHalf
+    HalfAndHalf
 }
 
+/**
+ * Options that control tree generation by a [TreeGenerator].
+ *
+ * @property maxDepth The maximum depth of trees generated.
+ * @property numFeatures The number of features available to trees generated.
+ * @property mode The method to use for generating tress.
+ * @property constants A set of constants available to trees generated.
+ */
 data class TreeGeneratorOptions(
         val maxDepth: Int,
         val numFeatures: Int,
@@ -15,20 +38,32 @@ data class TreeGeneratorOptions(
         val constants: List<Double>
 )
 
+/**
+ * Generates [Tree]s using a given function set and options.
+ *
+ * @property functions A function set made available to the trees generated.
+ * @property options Controls the operation of the tree generator.
+ */
 class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOptions) {
 
-    val random = Random()
+    private val random = Random()
 
+    /**
+     * Generates a random tree using the functions and options of this generator.
+     *
+     * @returns A tree that represents some program.
+     */
     fun generateTree(): Tree {
         // Start the tree with a function to prevent degenerate trees.
         val root = this.random.choice(this.functions)
 
         val tree = Tree(mutableListOf(root), this)
 
+        // Delegate to the appropriate tree generation mode.
         return when (this.options.mode) {
             TreeGenerationMode.Grow -> this.grow(tree)
             TreeGenerationMode.Full -> this.full(tree)
-            TreeGenerationMode.RampedHalfAndHalf -> this.rampedHalfAndHalf(tree)
+            TreeGenerationMode.HalfAndHalf -> this.rampedHalfAndHalf(tree)
         }
     }
 
@@ -130,10 +165,30 @@ class TreeGenerator(val functions: List<Function>, val options: TreeGeneratorOpt
     }
 }
 
+/**
+ * Represents a program as a tree of nodes.
+ *
+ * Internally, we keep a simple list of nodes that is the "program".
+ *
+ * @property nodes A collection of nodes that make up this tree.
+ * @property treeGenerator The tree generator used to create this tree (or its parent tree)
+ */
 class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
 
+    /**
+     * The fitness of this tree as based on some data set.
+     *
+     * Initially, the value will be set to a high constant (1e9) to penalise programs
+     * that haven't had their fitness evaluated yet.
+     */
     var fitness = 1e9
 
+    /**
+     * Executes the trees program on a set of inputs.
+     *
+     * @param case A collection of inputs to make available to the program.
+     * @returns The output of the program for the given inputs.
+     */
     fun execute(case: List<Double>): Double {
         val node = this.nodes.first()
 
@@ -176,11 +231,14 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         throw Exception("Failed to execute tree.")
     }
 
+    /**
+     * Creates a copy of this tree. All nodes are copied too.
+     */
     fun copy(): Tree {
         return Tree(this.nodes.map { n -> n }.toMutableList(), this.treeGenerator)
     }
 
-     internal fun getRandomSubtree(program: List<Node> = this.nodes): Pair<Int, Int> {
+    internal fun getRandomSubtree(program: List<Node> = this.nodes): Pair<Int, Int> {
         val random = Random()
 
         val probs = program.map { n ->
@@ -208,6 +266,13 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         return Pair(start, end)
     }
 
+    /**
+     * Performs the crossover operation on this tree and the tree given.
+     *
+     * Note that this operation directly modifies the tree that initiates the operation.
+     *
+     * @param other The tree to perform crossover with.
+     */
     fun crossover(other: Tree) {
         // Subtree from ourselves
         val (start, end) = this.getRandomSubtree()
@@ -223,6 +288,16 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         ).toMutableList()
     }
 
+    /**
+     * Performs the point mutation operation on this tree.
+     *
+     * Point mutation works by choosing a collection of random nodes in the
+     * tree to be replaced and then replacing each with another random node.
+     *
+     * Note that this operation directly modifies the tree that initiates the operation.
+     *
+     * @param replacementRate The frequency with which replacements should occur.
+     */
     fun pointMutation(replacementRate: Double) {
         val nodes = this.copy().nodes
         val random = Random()
@@ -238,7 +313,6 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         }.map { (idx, _) ->
             idx
         }
-
 
         mutate.map { node ->
             when (this.nodes[node]) {
@@ -271,12 +345,29 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         }
     }
 
+    /**
+     * Performs the subtree mutation operation on this tree.
+     *
+     * This is achieved by creating a new randomly generated tree and performing crossover
+     * with that new randomly generated tree.
+     *
+     * Note that this operation directly modifies the tree that initiates the operation.
+     */
     fun subtreeMutation() {
         val other = this.treeGenerator.generateTree()
 
         this.crossover(other)
     }
 
+    /**
+     * Performs the hoist mutation operation on this tree.
+     *
+     * Operates by choosing a random subtree of this tree, and then a random subtree
+     * within that subtree and replacing the first subtree by the second. This effectively
+     * "hoists" the subtree's subtree further up in the original tree.
+     *
+     * Note that this operation directly modifies the tree that initiates the operation.
+     */
     fun hoistMutation() {
         // Find a subtree to replace
         val (start, end) = this.getRandomSubtree()
@@ -294,6 +385,11 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
         ).toMutableList()
     }
 
+    /**
+     * Prints the tree as an S-expression.
+     *
+     * @returns A string representation of this tree as an S-expression.
+     */
     override fun toString(): String {
         val terminals = mutableListOf(0)
         val sb = StringBuilder()
@@ -332,10 +428,16 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
     }
 }
 
+/**
+ * @suppress
+ */
 fun <T> Random.choice(list: List<T>): T {
     return list[(this.nextDouble() * list.size).toInt()]
 }
 
+/**
+ * @suppress
+ */
 fun List<Double>.cumulativeSum(): List<Double> {
     var total = 0.0
 
@@ -346,6 +448,9 @@ fun List<Double>.cumulativeSum(): List<Double> {
     }
 }
 
+/**
+ * @suppress
+ */
 fun List<Double>.insertionPoint(value: Double): Int {
     var low = 0
     var high = this.size

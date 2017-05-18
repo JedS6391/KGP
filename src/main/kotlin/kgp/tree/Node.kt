@@ -1,11 +1,23 @@
 package main.kotlin.kgp.tree
 
+/**
+ * A node that makes up a program tree.
+ */
 interface Node {
+    /**
+     * The number of arguments that this node expects.
+     */
     val arity: Int
 
+    /**
+     * Evaluates this node on a set of arguments.
+     */
     fun evaluate(args: List<Double>): Double
 }
 
+/**
+ * A node that can perform some function on a set of arguments.
+ */
 abstract class Function(
         override val arity: Int,
         val representation: String
