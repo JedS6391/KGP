@@ -1,4 +1,4 @@
-package main.kotlin.kgp.fitness
+package kgp.fitness
 
 /**
  * A feature of some case in a data set.

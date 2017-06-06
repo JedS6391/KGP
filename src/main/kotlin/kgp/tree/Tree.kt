@@ -1,4 +1,4 @@
-package main.kotlin.kgp.tree
+package kgp.tree
 
 import java.util.*
 
@@ -194,7 +194,7 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
 
         when (node) {
             is Constant -> return node.value
-            is Input    -> return case[node.index]
+            is Input -> return case[node.index]
         }
 
         val stack = mutableListOf<MutableList<Node>>()
@@ -212,7 +212,7 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
                 val terminals = stack.last().slice(range).map { term ->
                     when (term) {
                         is Constant -> term.value
-                        is Input    -> case[term.index]
+                        is Input -> case[term.index]
                         else        -> throw Exception("Unexpected terminal type.")
                     }
                 }
@@ -403,7 +403,7 @@ class Tree(var nodes: MutableList<Node>, val treeGenerator: TreeGenerator) {
             } else {
                 when (node) {
                     is Constant -> sb.append(node.value)
-                    is Input    -> {
+                    is Input -> {
                         sb.append("x[")
                         sb.append(node.index)
                         sb.append("]")

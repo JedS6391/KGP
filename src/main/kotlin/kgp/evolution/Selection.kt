@@ -1,6 +1,6 @@
-package main.kotlin.kgp.evolution
+package kgp.evolution
 
-import main.kotlin.kgp.tree.Tree
+import kgp.tree.Tree
 import java.util.*
 
 /**

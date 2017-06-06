@@ -1,4 +1,6 @@
-package main.kotlin.kgp.tree
+package kgp.tree
+
+import kgp.tree.Operation
 
 /**
  * A node that makes up a program tree.

@@ -1,4 +1,4 @@
-package main.kotlin.kgp.tree
+package kgp.tree
 
 /**
  * An operation is really just a mapping of arguments to a value.

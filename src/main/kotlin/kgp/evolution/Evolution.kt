@@ -1,13 +1,14 @@
-package main.kotlin.kgp.evolution
+package kgp.evolution
 
-import main.kotlin.kgp.fitness.Cases
-import main.kotlin.kgp.fitness.Feature
-import main.kotlin.kgp.fitness.Metric
-import main.kotlin.kgp.tree.Function
-import main.kotlin.kgp.tree.Tree
-import main.kotlin.kgp.tree.TreeGenerator
-import main.kotlin.kgp.tree.TreeGeneratorOptions
+import kgp.fitness.Cases
+import kgp.fitness.Feature
+import kgp.fitness.Metric
+import kgp.tree.Function
+import kgp.tree.Tree
+import kgp.tree.TreeGenerator
+import kgp.tree.TreeGeneratorOptions
 import java.util.*
+import java.util.stream.Collectors
 
 /**
  * A model that trains a population of solutions.
@@ -182,9 +183,9 @@ class BaseModel(val options: EvolutionOptions) : Model {
                 }
 
                 // Evaluate this individual
-                val outputs = cases.map { (features) ->
+                val outputs = cases.parallelStream().map { (features) ->
                     individual.execute(features.map(Feature::value))
-                }
+                }.collect(Collectors.toList())
 
                 individual.fitness = this.options.metric.fitness(cases, outputs)
 

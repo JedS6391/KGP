@@ -1,6 +1,7 @@
-package main.kotlin.kgp.fitness
+package kgp.fitness
 
 import com.opencsv.CSVReader
+import kgp.fitness.Cases
 import java.io.FileReader
 
 /**

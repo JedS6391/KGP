@@ -1,5 +1,6 @@
-package main.kotlin.kgp.utilities
+package kgp.utilities
 
+import java.util.*
 import kotlin.coroutines.experimental.buildSequence
 
 /**
@@ -21,6 +22,27 @@ class IntervalSequenceGenerator {
             yield(x)
 
             x += step
+        }
+    }
+}
+
+class UniformlyDistributedSequenceGenerator {
+
+    /**
+     * Generates [n] values that are uniformly distributed between [start] and [end].
+     *
+     * @param n Number of values to generate.
+     * @param start Lower bound on the range of values.
+     * @param end Upper bound on the range of values.
+     */
+    fun generate(n: Int, start: Double, end: Double): Sequence<Double> = buildSequence {
+        val random = Random()
+
+        (0..n).map {
+            val r = random.nextDouble()
+
+            // Scaled to range
+            yield(r * (end - start) + start)
         }
     }
 }
