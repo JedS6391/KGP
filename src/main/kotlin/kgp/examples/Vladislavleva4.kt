@@ -7,39 +7,52 @@ import kgp.evolution.EvolutionOptions
 import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
+import java.util.*
 
-class BasicRegressionProblem {
+
+class Vladislavleva4 {
 
     object Main {
-
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(
                     Nodes.Addition(),
                     Nodes.Subtraction(),
                     Nodes.Multiplication(),
-                    Nodes.Division()
+                    Nodes.Division(),
+                    CustomOperations.Square()
             ).toList()
 
             val caseLoader = object : CaseLoader {
-                val f: (Double, Double) -> Double = { x0, x1 ->
-                    Math.pow(x0, 2.0) - Math.pow(x1, 2.0) + x1 - 1.0
+                val f = { x0: Double, x1: Double, x2: Double, x3: Double, x4: Double ->
+                    val xs = listOf(x0, x1, x2, x3, x4)
+
+                    10 / (5 + xs.sumByDouble { x -> Math.pow(x - 3.0, 2.0) })
                 }
+
                 val range = UniformlyDistributedSequenceGenerator()
 
                 override fun loadCases(): Cases {
-                    val seq = range.generate(200, -1.0, 1.0)
+                    val seq = range.generate(5120, 0.05, 6.05)
 
-                    val x0s = seq.take(100).map { x0 ->
-                        Feature(x0, "x0")
-                    }
-                    val x1s = seq.take(100).map { x1 ->
-                        Feature(x1, "x1")
+                    val samples = (0..1024).map {
+                        val features = seq.take(5).mapIndexed { idx, f ->
+                            Feature(name = "x$idx", value = f)
+                        }
+
+                        features.toList()
                     }
 
-                    val cases = x0s.zip(x1s).map { (x0, x1) ->
-                        val y = this.f(x0.value, x1.value)
-                        Case(listOf(x0, x1), y)
+                    val cases = samples.map { sample ->
+                        val x0 = sample[0].value
+                        val x1 = sample[1].value
+                        val x2 = sample[2].value
+                        val x3 = sample[3].value
+                        val x4 = sample[4].value
+
+                        val target = this.f(x0, x1, x2, x3, x4)
+
+                        Case(sample, target)
                     }.toList()
 
                     return cases
@@ -50,22 +63,22 @@ class BasicRegressionProblem {
 
             val genOptions = TreeGeneratorOptions(
                     maxDepth = 5,
-                    numFeatures = 2,
-                    constants = listOf(0.0, 1.0, 2.0),
+                    numFeatures = 5,
+                    constants = listOf(Random().nextDouble()),
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
-            val mae = Metric(function = { cases, outputs ->
-                val ae = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.abs(predicted - expected.output)
+            val mse = Metric(function = { cases, outputs ->
+                val se = cases.zip(outputs).map { (expected, predicted) ->
+                    Math.pow((predicted - expected.output), 2.0)
                 }.sum()
 
-                ((1.0 / cases.size.toDouble()) * ae)
+                ((1.0 / cases.size.toDouble()) * se)
             })
 
             val evoOptions = EvolutionOptions(
-                    populationSize = 1000,
-                    generations = 1000,
+                    populationSize = 500,
+                    generations = 100,
                     tournamentSize = 20,
                     crossoverRate = 0.7,
                     subtreeMutationRate = 0.1,
@@ -75,7 +88,7 @@ class BasicRegressionProblem {
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = FitnessFunctions.mae,
+                    metric = mse,
                     stoppingThreshold = 0.01
             )
 
@@ -84,7 +97,6 @@ class BasicRegressionProblem {
             model.train(cases)
 
             println(model.best)
-            println(model.best.fitness)
         }
     }
 }

@@ -7,52 +7,51 @@ import kgp.evolution.EvolutionOptions
 import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.IntervalSequenceGenerator
+import java.util.*
 
-class Keijzer6 {
+class DOWChemical {
+
     object Main {
+
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(
                     Nodes.Addition(),
+                    Nodes.Subtraction(),
                     Nodes.Multiplication(),
-                    CustomOperations.Inverse(),
-                    CustomOperations.Negation(),
-                    CustomOperations.SquareRoot()
+                    Nodes.Division(),
+                    Nodes.Sine(),
+                    Nodes.Cosine(),
+                    CustomOperations.SquareRoot(),
+                    CustomOperations.Exponent()
             ).toList()
 
-            val caseLoader = object : CaseLoader {
-                val f = { x: Double ->
-                    (1..x.toInt()).map { i ->
-                        1.0 / i
-                    }.sum()
-                }
-                val range = IntervalSequenceGenerator()
-
-                override fun loadCases(): Cases {
-                    val xs = range.generate(1.0, 51.0, 1.0).map { x ->
-                        Feature(x, "x")
-                    }
-
-                    val cases = xs.map { x ->
-                        val y = this.f(x.value)
-                        Case(listOf(x), y)
-                    }.toList()
-
-                    return cases
-                }
-            }
+            val caseLoader = CsvCaseLoader(
+                    options = CsvCaseLoaderOptions(
+                            filename = "/Users/jedsimson/Desktop/DOW-Chemical-Datasets/TrainingData.csv",
+                            numFeatures = 57
+                    )
+            )
 
             val cases = caseLoader.loadCases()
 
             val genOptions = TreeGeneratorOptions(
-                    maxDepth = 5,
-                    numFeatures = 1,
-                    constants = listOf(0.0, 1.0),
+                    maxDepth = 8,
+                    numFeatures = 57,
+                    constants = listOf(Random().nextDouble()),
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
+            val mse = Metric(function = { cases, outputs ->
+                val se = cases.zip(outputs).map { (expected, predicted) ->
+                    Math.pow((predicted - expected.output), 2.0)
+                }.sum()
+
+                ((1.0 / cases.size.toDouble()) * se)
+            })
+
             val evoOptions = EvolutionOptions(
-                    populationSize = 1000,
+                    populationSize = 500,
                     generations = 100,
                     tournamentSize = 20,
                     crossoverRate = 0.7,
@@ -63,7 +62,7 @@ class Keijzer6 {
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = FitnessFunctions.mse,
+                    metric = mse,
                     stoppingThreshold = 0.01
             )
 
