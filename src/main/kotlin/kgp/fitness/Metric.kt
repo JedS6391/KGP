@@ -53,3 +53,27 @@ class Metric(val function: FitnessFunction) {
         return this.function(cases, outputs)
     }
 }
+
+object FitnessFunctions {
+    val sse = Metric(function = { cases, outputs ->
+        cases.zip(outputs).map { (expected, predicted) ->
+            Math.pow((predicted - expected.output), 2.0)
+        }.sum()
+    })
+
+    val mse = Metric(function = { cases, outputs ->
+        val sse = cases.zip(outputs).map { (expected, predicted) ->
+            Math.pow((predicted - expected.output), 2.0)
+        }.sum()
+
+        ((1.0 / cases.size.toDouble()) * sse)
+    })
+
+    val mae = Metric(function = { cases, outputs ->
+        val ae = cases.zip(outputs).map { (expected, predicted) ->
+            Math.abs(predicted - expected.output)
+        }.sum()
+
+        ((1.0 / cases.size.toDouble()) * ae)
+    })
+}
