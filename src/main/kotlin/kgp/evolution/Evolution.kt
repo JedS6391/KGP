@@ -3,6 +3,7 @@ package kgp.evolution
 import kgp.fitness.Cases
 import kgp.fitness.Feature
 import kgp.fitness.Metric
+import kgp.fitness.ParsimonyAwareMetric
 import kgp.tree.Function
 import kgp.tree.Tree
 import kgp.tree.TreeGenerator
@@ -149,12 +150,12 @@ class BaseModel(val options: EvolutionOptions) : Model {
 
         // Determine initial fitness values for population.
         // Assumes that the population has already been initialised.
-        this.population.forEach { tree ->
+        this.population.parallelStream().forEach { tree ->
             val outputs = cases.map { (features) ->
                 tree.execute(features.map(Feature::value))
             }
 
-            tree.fitness = this.options.metric.fitness(cases, outputs)
+            tree.fitness = this.options.metric.fitness(cases, outputs, tree.nodes.size)
         }
 
         // Sort population so that the fittest individual is first.
@@ -187,7 +188,7 @@ class BaseModel(val options: EvolutionOptions) : Model {
                     individual.execute(features.map(Feature::value))
                 }.collect(Collectors.toList())
 
-                individual.fitness = this.options.metric.fitness(cases, outputs)
+                individual.fitness = this.options.metric.fitness(cases, outputs, individual.nodes.size)
 
                 // Choose a member of the existing population to replace with this new individual.
                 // TODO: Make selector return index of tournament winner/loser.
