@@ -1,0 +1,195 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Function - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.tree</a>&nbsp;/&nbsp;<a href=".">Function</a><br/>
+<br/>
+<h1>Function</h1>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Function</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a></code>
+<p>A node that can perform some function on a set of arguments.</p>
+<p>Function nodes make up the inner nodes of a program tree.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">Function</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Function$<init>(kotlin.Int, kotlin.String)/arity">arity</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">, </span><span class="identifier" id="kgp.tree.Function$<init>(kotlin.Int, kotlin.String)/representation">representation</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span></code>
+<p>A node that can perform some function on a set of arguments.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="arity.html">arity</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">arity</span><span class="symbol">: </span><span class="identifier">Int</span></code>
+<p>The number of arguments this function operates on.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="operation.html">operation</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">operation</span><span class="symbol">: </span><a href="../-operation.html"><span class="identifier">Operation</span></a></code>
+<p>An operation that this function performs when evaluated.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="representation.html">representation</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">representation</span><span class="symbol">: </span><span class="identifier">String</span></code>
+<p>A representation of this function that can be output.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="evaluate.html">evaluate</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">evaluate</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Function$evaluate(kotlin.collections.List((kotlin.Double)))/args">args</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>Evaluates this function on the given arguments.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-nodes/-addition/index.html">Addition</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Addition</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Adds two arguments together (x + y).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-nodes/-cosine/index.html">Cosine</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Cosine</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the cosine function on a single argument (cos(x))</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-cube/index.html">Cube</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Cube</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Cubes a single argument (x^3).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-nodes/-division/index.html">Division</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Division</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Divides one argument by the other in a protected manner (x / if (x == 0) 1.0 else y).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-exponent/index.html">Exponent</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Exponent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the exponent function on two arguments (|x|^y).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-hyperbolic-tangent/index.html">HyperbolicTangent</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">HyperbolicTangent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the hyperbolic tangent function on a single argument (tanh(x)).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-inverse/index.html">Inverse</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Inverse</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the inverse function on a single argument (1 / x).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-nodes/-multiplication/index.html">Multiplication</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Multiplication</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Multiplies two arguments together (x * y).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-natural-log/index.html">NaturalLog</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">NaturalLog</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the natural log function on a single argument (ln(x)).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-negation/index.html">Negation</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Negation</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the negation function on a single argument (-x).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-nodes/-sine/index.html">Sine</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Sine</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the sine function on a single argument (sin(x))</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-square/index.html">Square</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Square</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Squares a single argument (x^2).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-square-root/index.html">SquareRoot</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">SquareRoot</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the square root function on a single argument (sqrt(x)).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-nodes/-subtraction/index.html">Subtraction</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Subtraction</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Subtracts one argument from the other (x - y).</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../../kgp.examples/-custom-operations/-tangent/index.html">Tangent</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Tangent</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Function</span></code>
+<p>Performs the tangent function on a single argument (tan(x)).</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

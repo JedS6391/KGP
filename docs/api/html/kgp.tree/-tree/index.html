@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>Tree - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.tree</a>&nbsp;/&nbsp;<a href=".">Tree</a><br/>
+<br/>
+<h1>Tree</h1>
+<code><span class="keyword">class </span><span class="identifier">Tree</span></code>
+<p>Represents a program as a tree of nodes.</p>
+<p>Internally, we keep a simple list of nodes that is the "program".</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">Tree</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Tree$<init>(kotlin.collections.MutableList((kgp.tree.Node)), kgp.tree.TreeGenerator)/nodes">nodes</span><span class="symbol">:</span>&nbsp;<span class="identifier">MutableList</span><span class="symbol">&lt;</span><a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="kgp.tree.Tree$<init>(kotlin.collections.MutableList((kgp.tree.Node)), kgp.tree.TreeGenerator)/treeGenerator">treeGenerator</span><span class="symbol">:</span>&nbsp;<a href="../-tree-generator/index.html"><span class="identifier">TreeGenerator</span></a><span class="symbol">)</span></code>
+<p>Represents a program as a tree of nodes.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="fitness.html">fitness</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fitness</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The fitness of this tree as based on some data set.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="nodes.html">nodes</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">nodes</span><span class="symbol">: </span><span class="identifier">MutableList</span><span class="symbol">&lt;</span><a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">&gt;</span></code>
+<p>A collection of nodes that make up this tree.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="tree-generator.html">treeGenerator</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">treeGenerator</span><span class="symbol">: </span><a href="../-tree-generator/index.html"><span class="identifier">TreeGenerator</span></a></code>
+<p>The tree generator used to create this tree (or its parent tree)</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="copy.html">copy</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">copy</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Tree</span></code>
+<p>Creates a copy of this tree. All nodes are copied too.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="crossover.html">crossover</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">crossover</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Tree$crossover(kgp.tree.Tree)/other">other</span><span class="symbol">:</span>&nbsp;<span class="identifier">Tree</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Performs the crossover operation on this tree and the tree given.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="execute.html">execute</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">execute</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Tree$execute(kotlin.collections.List((kotlin.Double)))/case">case</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>Executes the trees program on a set of inputs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="hoist-mutation.html">hoistMutation</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hoistMutation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Performs the hoist mutation operation on this tree.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="point-mutation.html">pointMutation</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">pointMutation</span><span class="symbol">(</span><span class="identifier" id="kgp.tree.Tree$pointMutation(kotlin.Double)/replacementRate">replacementRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Performs the point mutation operation on this tree.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="subtree-mutation.html">subtreeMutation</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">subtreeMutation</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Performs the subtree mutation operation on this tree.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="to-string.html">toString</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code>
+<p>Prints the tree as an S-expression.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

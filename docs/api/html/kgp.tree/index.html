@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>kgp.tree - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href=".">kgp.tree</a><br/>
+<br/>
+<h2>Package kgp.tree</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-constant/index.html">Constant</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Constant</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-terminal/index.html"><span class="identifier">Terminal</span></a></code>
+<p>A terminal node that represents a constant value.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-function/index.html">Function</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Function</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-node/index.html"><span class="identifier">Node</span></a></code>
+<p>A node that can perform some function on a set of arguments.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-input/index.html">Input</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Input</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-terminal/index.html"><span class="identifier">Terminal</span></a></code>
+<p>A terminal node that represents a feature value.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-node/index.html">Node</a></td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Node</span></code>
+<p>A node that makes up a program tree.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-nodes/index.html">Nodes</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">Nodes</span></code>
+<p>A collection of function nodes that are available by default.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-terminal/index.html">Terminal</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Terminal</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-node/index.html"><span class="identifier">Node</span></a></code>
+<p>A node that does not have any child nodes.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-tree/index.html">Tree</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Tree</span></code>
+<p>Represents a program as a tree of nodes.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-tree-generation-mode/index.html">TreeGenerationMode</a></td>
+<td>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TreeGenerationMode</span></code>
+<p>Represents the different types of tree generation methods.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-tree-generator/index.html">TreeGenerator</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TreeGenerator</span></code>
+<p>Generates <a href="-tree/index.html">Tree</a>s using a given function set and options.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-tree-generator-options/index.html">TreeGeneratorOptions</a></td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">TreeGeneratorOptions</span></code>
+<p>Options that control tree generation by a <a href="-tree-generator/index.html">TreeGenerator</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Exceptions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-arity-exception/index.html">ArityException</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ArityException</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Exception</span></code>
+<p>Exception given when the number of arguments given to a function does not match its arity.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-operation.html">Operation</a></td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Operation</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><span class="identifier">args</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Double</span></code>
+<p>An operation is really just a mapping of arguments to a value.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

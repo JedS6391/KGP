@@ -1,0 +1,147 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>EvolutionOptions - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.evolution</a>&nbsp;/&nbsp;<a href=".">EvolutionOptions</a><br/>
+<br/>
+<h1>EvolutionOptions</h1>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">EvolutionOptions</span></code>
+<p>A collection of options available to configure evolution by the <a href="../-base-model/index.html">BaseModel</a>.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">EvolutionOptions</span><span class="symbol">(</span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/populationSize">populationSize</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/generations">generations</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/tournamentSize">tournamentSize</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/crossoverRate">crossoverRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/subtreeMutationRate">subtreeMutationRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/hoistMutationRate">hoistMutationRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/pointMutationRate">pointMutationRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/pointReplacementRate">pointReplacementRate</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/numOffspring">numOffspring</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/functionSet">functionSet</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><a href="../../kgp.tree/-function/index.html"><span class="identifier">Function</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/treeGeneratorOptions">treeGeneratorOptions</span><span class="symbol">:</span>&nbsp;<a href="../../kgp.tree/-tree-generator-options/index.html"><span class="identifier">TreeGeneratorOptions</span></a><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/metric">metric</span><span class="symbol">:</span>&nbsp;<a href="../../kgp.fitness/-metric/index.html"><span class="identifier">Metric</span></a><span class="symbol">, </span><span class="identifier" id="kgp.evolution.EvolutionOptions$<init>(kotlin.Int, kotlin.Int, kotlin.Int, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Double, kotlin.Int, kotlin.collections.List((kgp.tree.Function)), kgp.tree.TreeGeneratorOptions, kgp.fitness.Metric, kotlin.Double)/stoppingThreshold">stoppingThreshold</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">)</span></code>
+<p>A collection of options available to configure evolution by the <a href="../-base-model/index.html">BaseModel</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="crossover-rate.html">crossoverRate</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">crossoverRate</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The probability that crossover will occur between two individuals in the population.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="function-set.html">functionSet</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">functionSet</span><span class="symbol">: </span><span class="identifier">List</span><span class="symbol">&lt;</span><a href="../../kgp.tree/-function/index.html"><span class="identifier">Function</span></a><span class="symbol">&gt;</span></code>
+<p>The functions that are available to programs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="generations.html">generations</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">generations</span><span class="symbol">: </span><span class="identifier">Int</span></code>
+<p>The number of generations to perform evolution for.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="hoist-mutation-rate.html">hoistMutationRate</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">hoistMutationRate</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The probability that an individual will undergo a hoist mutation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="metric.html">metric</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">metric</span><span class="symbol">: </span><a href="../../kgp.fitness/-metric/index.html"><span class="identifier">Metric</span></a></code>
+<p>A measure that can be used to evaluate individuals in the population.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="num-offspring.html">numOffspring</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">numOffspring</span><span class="symbol">: </span><span class="identifier">Int</span></code>
+<p>Number of individuals taken at each generation to have genetic operators applied to them.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="point-mutation-rate.html">pointMutationRate</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">pointMutationRate</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The probability that an individual will undergo a point mutation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="point-replacement-rate.html">pointReplacementRate</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">pointReplacementRate</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The frequency with which points should be chosen for point mutation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="population-size.html">populationSize</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">populationSize</span><span class="symbol">: </span><span class="identifier">Int</span></code>
+<p>The number of solutions the model can have at any time during evolution.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="stopping-threshold.html">stoppingThreshold</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">stoppingThreshold</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>A threshold that configures how good solutions should be before stopping.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="subtree-mutation-rate.html">subtreeMutationRate</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">subtreeMutationRate</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>The probability that an individual will undergo a subtree mutation.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="tournament-size.html">tournamentSize</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">tournamentSize</span><span class="symbol">: </span><span class="identifier">Int</span></code>
+<p>The size of the tournaments performed by the <a href="../-tournament-selection/index.html">TournamentSelection</a> operator..</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="tree-generator-options.html">treeGeneratorOptions</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">treeGeneratorOptions</span><span class="symbol">: </span><a href="../../kgp.tree/-tree-generator-options/index.html"><span class="identifier">TreeGeneratorOptions</span></a></code>
+<p>Options that configure tree generation.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="to-string.html">toString</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

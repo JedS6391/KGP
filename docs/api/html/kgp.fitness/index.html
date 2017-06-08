@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>kgp.fitness - </title>
+<link rel="stylesheet" href="../style.css">
+</HEAD>
+<BODY>
+<a href=".">kgp.fitness</a><br/>
+<br/>
+<h2>Package kgp.fitness</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-base-metric/index.html">BaseMetric</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">BaseMetric</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-metric/index.html"><span class="identifier">Metric</span></a></code>
+<p>A base implementation for measuring the fitness of solutions.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-case/index.html">Case</a></td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Case</span></code>
+<p>A case in a data set.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-case-loader/index.html">CaseLoader</a></td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">CaseLoader</span></code>
+<p>A component that can load a set of cases from some source.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-csv-case-loader/index.html">CsvCaseLoader</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">CsvCaseLoader</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-case-loader/index.html"><span class="identifier">CaseLoader</span></a></code>
+<p>A <a href="-case-loader/index.html">CaseLoader</a> that loads cases from a CSV file.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-csv-case-loader-options/index.html">CsvCaseLoaderOptions</a></td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">CsvCaseLoaderOptions</span></code>
+<p>Options to configure a <a href="-csv-case-loader/index.html">CsvCaseLoader</a> instance.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-feature/index.html">Feature</a></td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Feature</span></code>
+<p>A feature of some case in a data set.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-fitness-functions/index.html">FitnessFunctions</a></td>
+<td>
+<code><span class="keyword">object </span><span class="identifier">FitnessFunctions</span></code>
+<p>A collection of standard fitness functions as metrics.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-metric/index.html">Metric</a></td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">Metric</span></code>
+<p>Provides a way of measuring the fitness of a set of outputs.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-parsimony-aware-metric/index.html">ParsimonyAwareMetric</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ParsimonyAwareMetric</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-metric/index.html"><span class="identifier">Metric</span></a></code>
+<p>Provides a way of measuring the fitness of a set of outputs with a penalty for parsimony pressure.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Type Aliases</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-cases.html">Cases</a></td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Cases</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><a href="-case/index.html"><span class="identifier">Case</span></a><span class="symbol">&gt;</span></code>
+<p>A set of cases that a program will be trained on.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-fitness-function.html">FitnessFunction</a></td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">FitnessFunction</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="symbol">(</span><a href="-cases.html"><span class="identifier">Cases</span></a><span class="symbol">,</span>&nbsp;<a href="-outputs.html"><span class="identifier">Outputs</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Double</span></code>
+<p>A function that will evaluate the performance a program based on
+how close its outputs were to the cases given.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-outputs.html">Outputs</a></td>
+<td>
+<code><span class="keyword">typealias </span><span class="identifier">Outputs</span>&nbsp;<span class="symbol">=</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">Double</span><span class="symbol">&gt;</span></code>
+<p>A set of outputs given by a program on a set of training cases.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

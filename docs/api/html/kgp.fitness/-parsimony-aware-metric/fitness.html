@@ -1,0 +1,18 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>ParsimonyAwareMetric.fitness - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.fitness</a>&nbsp;/&nbsp;<a href="index.html">ParsimonyAwareMetric</a>&nbsp;/&nbsp;<a href=".">fitness</a><br/>
+<br/>
+<h1>fitness</h1>
+<a name="kgp.fitness.ParsimonyAwareMetric$fitness(kotlin.collections.List((kgp.fitness.Case)), kotlin.collections.List((kotlin.Double)), kotlin.Int)"></a>
+<code><span class="keyword">fun </span><span class="identifier">fitness</span><span class="symbol">(</span><span class="identifier" id="kgp.fitness.ParsimonyAwareMetric$fitness(kotlin.collections.List((kgp.fitness.Case)), kotlin.collections.List((kotlin.Double)), kotlin.Int)/cases">cases</span><span class="symbol">:</span>&nbsp;<a href="../-cases.html"><span class="identifier">Cases</span></a><span class="symbol">, </span><span class="identifier" id="kgp.fitness.ParsimonyAwareMetric$fitness(kotlin.collections.List((kgp.fitness.Case)), kotlin.collections.List((kotlin.Double)), kotlin.Int)/outputs">outputs</span><span class="symbol">:</span>&nbsp;<a href="../-outputs.html"><span class="identifier">Outputs</span></a><span class="symbol">, </span><span class="identifier" id="kgp.fitness.ParsimonyAwareMetric$fitness(kotlin.collections.List((kgp.fitness.Case)), kotlin.collections.List((kotlin.Double)), kotlin.Int)/programLength">programLength</span><span class="symbol">:</span>&nbsp;<span class="identifier">Int</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>Overrides <a href="../-metric/fitness.html">Metric.fitness</a></p>
+<p>Evaluates the fitness based on a set of cases and a set of outputs.</p>
+<p>The raw fitness will be penalised with by a small factor based on the program's length:</p>
+<p>fitness = <a href="function.html">function</a> - (<a href="parsimony-coefficient.html">parsimonyCoefficient</a> * <a href="fitness.html#kgp.fitness.ParsimonyAwareMetric$fitness(kotlin.collections.List((kgp.fitness.Case)), kotlin.collections.List((kotlin.Double)), kotlin.Int)/programLength">programLength</a>)</p>
+</BODY>
+</HTML>

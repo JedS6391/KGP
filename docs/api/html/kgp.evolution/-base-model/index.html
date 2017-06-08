@@ -1,0 +1,79 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>BaseModel - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.evolution</a>&nbsp;/&nbsp;<a href=".">BaseModel</a><br/>
+<br/>
+<h1>BaseModel</h1>
+<code><span class="keyword">class </span><span class="identifier">BaseModel</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-model/index.html"><span class="identifier">Model</span></a></code>
+<p>A base model for evolving trees.</p>
+<p>The best solution will be maintained by the model and will be made available
+when testing (i.e. making a prediction) using the model.</p>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">BaseModel</span><span class="symbol">(</span><span class="identifier" id="kgp.evolution.BaseModel$<init>(kgp.evolution.EvolutionOptions)/options">options</span><span class="symbol">:</span>&nbsp;<a href="../-evolution-options/index.html"><span class="identifier">EvolutionOptions</span></a><span class="symbol">)</span></code>
+<p>A base model for evolving trees.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="best.html">best</a></td>
+<td>
+<code><span class="keyword">lateinit</span> <span class="keyword">var </span><span class="identifier">best</span><span class="symbol">: </span><a href="../../kgp.tree/-tree/index.html"><span class="identifier">Tree</span></a></code>
+<p>The best solution this model has found.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="options.html">options</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">options</span><span class="symbol">: </span><a href="../-evolution-options/index.html"><span class="identifier">EvolutionOptions</span></a></code>
+<p>A set of options for configuring the model.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="population.html">population</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">population</span><span class="symbol">: </span><span class="identifier">MutableList</span><span class="symbol">&lt;</span><a href="../../kgp.tree/-tree/index.html"><span class="identifier">Tree</span></a><span class="symbol">&gt;</span></code>
+<p>A collection of solutions this model has found.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="test.html">test</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">test</span><span class="symbol">(</span><span class="identifier" id="kgp.evolution.BaseModel$test(kotlin.collections.List((kgp.fitness.Feature)))/features">features</span><span class="symbol">:</span>&nbsp;<span class="identifier">List</span><span class="symbol">&lt;</span><a href="../../kgp.fitness/-feature/index.html"><span class="identifier">Feature</span></a><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Double</span></code>
+<p>Tests the model by evaluating the model on a set of features.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="train.html">train</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">train</span><span class="symbol">(</span><span class="identifier" id="kgp.evolution.BaseModel$train(kotlin.collections.List((kgp.fitness.Case)))/cases">cases</span><span class="symbol">:</span>&nbsp;<a href="../../kgp.fitness/-cases.html"><span class="identifier">Cases</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Trains the model on a set of input-output cases.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

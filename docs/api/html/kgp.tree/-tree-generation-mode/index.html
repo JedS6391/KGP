@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>TreeGenerationMode - </title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">kgp.tree</a>&nbsp;/&nbsp;<a href=".">TreeGenerationMode</a><br/>
+<br/>
+<h1>TreeGenerationMode</h1>
+<code><span class="keyword">enum</span> <span class="keyword">class </span><span class="identifier">TreeGenerationMode</span></code>
+<p>Represents the different types of tree generation methods.</p>
+<p><a href="-grow.html">Grow</a> mode will generate trees with nodes chosen randomly from
+the union of the function and terminal sets, allowing trees that are
+smaller than the max depth to be created. This method generally produces
+asymmetric trees.</p>
+<p><a href="-full.html">Full</a> mode will generates tree with nodes chosen from the function set,
+until the maximum depth is reached when it will start choosing from the
+terminal set. This tends to grow "bushy" symmetrical trees.</p>
+<p><a href="-half-and-half.html">HalfAndHalf</a> mode will use a 50/50 combination of the full and grow modes,
+meaning the trees in the initial population will have a mix of shapes.</p>
+<h3>Enum Values</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-grow.html">Grow</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-full.html">Full</a></td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<a href="-half-and-half.html">HalfAndHalf</a></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
