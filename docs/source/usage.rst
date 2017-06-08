@@ -3,7 +3,9 @@ Usage
 
 This section will detail some of the concepts that are used by KGP in order to facilitate evolution. It will do this by first describing the concept and then providing an example usage to put these concepts into a more practical context.
 
-To solve a problem using KGP, it is as simple as adding the JAR file to the class path and building against it.
+To solve a problem using KGP, it is as simple as adding the JAR file to the class path and building against it. The JAR file can be downloaded from `here <https://github.com/JedS6391/KGP/releases/tag/v0.1/>`_.
+
+To see how to run the example problems see :doc:`Examples </examples/>` section.
 
 Model
 =====

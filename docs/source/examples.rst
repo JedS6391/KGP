@@ -7,14 +7,21 @@ This section will provide some information about each example problem and its im
 
 For each example the data used to train the model is described. U[*a, b, c*] is *c* uniform random samples drawn from *a* to *b* inclusive. E[*a, b, c*] is a set of points evenly spaced with an interval of *c* from *a* to *b* inclusive.
 
-The examples are included in the JAR file at []() and can be run at the command-line using the following command:
+The examples are included in the JAR file which can be downloaded from `here <https://github.com/JedS6391/KGP/releases/tag/v0.1/>`_ and can be run at the command-line using the following command:
 
 .. code-block:: shell
 
     java -cp KGP-1.0-SNAPSHOT.jar kgp.examples.<PROBLEM>
 
-where ``<PROBLEM>`` is one of the problems given below (names here).
+where ``<PROBLEM>`` is one of the problems given below:
 
+- ``BasicRegressionProblem``
+- ``QuarticPolynomial``
+- ``Keijzer6``
+- ``Korns12``
+- ``Nguyen7``
+- ``Pagie1``
+- ``Vladislavleva4``
 
 Basic Regression Problem
 ========================
