@@ -10,9 +10,9 @@ KGP provides an implementation of tree-based genetic programming for the Kotlin 
 
 KGP can be used to solve Symbolic Regression problems and features full interoperability with other JVM languages.
 
-A guide describing the concepts of the system as well as high level usage instructions can be found [here](http://kgp.readthedocs.io/en/latest/).
+A guide describing the concepts of the system as well as high level usage instructions can be found [here](https://kgp.readthedocs.io/en/latest/).
 
-Documentation for the API can be viewed [here](https://jeds6391.github.io/KGP/) for the technically minded.
+Documentation for the API can be viewed [here](https://jeds6391.github.io/KGP/api/html/index.html) for the technically minded.
 
 ## Usage
 
