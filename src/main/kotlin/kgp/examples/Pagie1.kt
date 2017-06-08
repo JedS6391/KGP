@@ -11,7 +11,7 @@ import kgp.utilities.IntervalSequenceGenerator
 
 class Pagie1 {
 
-    object Main {
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(

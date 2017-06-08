@@ -9,7 +9,8 @@ import kgp.tree.Nodes
 import kgp.utilities.IntervalSequenceGenerator
 
 class Keijzer6 {
-    object Main {
+
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(

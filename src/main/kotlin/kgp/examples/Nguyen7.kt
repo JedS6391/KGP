@@ -11,7 +11,7 @@ import kgp.utilities.UniformlyDistributedSequenceGenerator
 
 class Nguyen7 {
 
-    object Main {
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(

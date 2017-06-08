@@ -13,7 +13,7 @@ import java.util.*
 
 class QuarticPolynomial {
 
-    object Main {
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(

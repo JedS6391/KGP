@@ -12,7 +12,7 @@ import java.util.*
 
 class Vladislavleva4 {
 
-    object Main {
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(

@@ -10,7 +10,7 @@ import kgp.utilities.UniformlyDistributedSequenceGenerator
 
 class BasicRegressionProblem {
 
-    object Main {
+    companion object Main {
 
         @JvmStatic
         fun main(args: Array<String>) {

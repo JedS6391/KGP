@@ -12,7 +12,7 @@ import java.util.*
 
 class Korns12 {
 
-    object Main {
+    companion object Main {
         @JvmStatic
         fun main(args: Array<String>) {
             val functions = setOf(
