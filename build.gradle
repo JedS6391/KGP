@@ -35,3 +35,14 @@ kotlin {
         coroutines "enable"
     }
 }
+
+task buildJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'KGP',
+                'Implementation-Version': version
+    }
+
+    baseName = project.name
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
