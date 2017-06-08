@@ -12,6 +12,8 @@ KGP can be applied to symbolic regression problems as the problems are easily an
 
 This manual will include an introduction to the concepts of genetic programming and how KGP implements them, some details about using KGP, examples of KGP being used to solve symbolic regression problems, and some advanced concepts regarding the implementations design.
 
+To view the API documentation, please visit `https://jeds6391.github.io/KGP/<https://jeds6391.github.io/KGP/>`_. This documentation details the different interfaces and implementations that make up the system in more technical detail.
+
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
