@@ -1,6 +1,10 @@
 Usage
 *****
 
+This section will detail some of the concepts that are used by KGP in order to facilitate evolution. It will do this by first describing the concept and then providing an example usage to put these concepts into a more practical context.
+
+To solve a problem using KGP, it is as simple as adding the JAR file to the class path and building against it.
+
 Model
 =====
 
@@ -63,7 +67,7 @@ An example set of evolution options is given below:
 
     val evolutionOptions = EvolutionOptions(
             populationSize = 1000,
-            generations = 1000,
+            generations = 500,
             tournamentSize = 20,
             crossoverRate = 0.7,
             subtreeMutationRate = 0.1,
@@ -74,7 +78,8 @@ An example set of evolution options is given below:
             functionSet = listOf(
                 Nodes.Addition(),
                 Nodes.Subtraction(),
-                Nodes.Multiplication ()
+                Nodes.Multiplication(),
+                Nodes.Division()
             ),
             treeGeneratorOptions = TreeGeneratorOptions(
                 maxDepth = 5,
@@ -145,7 +150,7 @@ Now that we've defined the options for the evolution model and have a set of cas
 
 An example solution for the problem defined above is given below in LISP format:
 
-.. code-block:: lisp
+.. code-block:: clojure
 
     (- x1
        (+
