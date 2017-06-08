@@ -26,6 +26,9 @@ class IntervalSequenceGenerator {
     }
 }
 
+/**
+ * A component that can generate uniformly distributed sequences of doubles within a specified interval.
+ */
 class UniformlyDistributedSequenceGenerator {
 
     /**

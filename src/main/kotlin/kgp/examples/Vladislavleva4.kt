@@ -9,7 +9,14 @@ import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
 import java.util.*
 
-
+/**
+ * The Vladislavleva-4 problem as given by White et al. (2013).
+ *
+ * **See Also**
+ *
+ * - [White et al.  (2013)](http://link.springer.com/10.1007/s10710-012-9177-2)
+ * - [Vladislavleva 4](http://kgp.readthedocs.io/en/latest/examples.html#vladislavleva-4)
+ */
 class Vladislavleva4 {
 
     companion object Main {

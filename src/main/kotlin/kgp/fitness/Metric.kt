@@ -36,17 +36,28 @@ typealias Cases = List<Case>
  */
 typealias FitnessFunction = (Cases, Outputs) -> Double
 
+/**
+ * Provides a way of measuring the fitness of a set of outputs.
+ *
+ * @property name A name for this metric.
+ * @property function A fitness function this metric encapsulates.
+ */
 interface Metric {
     val name: String
     val function: FitnessFunction
 
+    /**
+     * Evaluates the fitness using this metrics fitness function.
+     *
+     * @property cases The expected input-output cases.
+     * @property outputs The predicted outputs of a program.
+     * @property programLength The length of the program being evaluated.
+     */
     fun fitness(cases: Cases, outputs: Outputs, programLength: Int): Double
 }
 
 /**
- * Provides a way of measuring the fitness of a set of outputs.
- *
- * @param function A fitness function that this metric will use.
+ * A base implementation for measuring the fitness of solutions.
  */
 class BaseMetric(override val name: String, override val function: FitnessFunction) : Metric {
 
@@ -55,12 +66,18 @@ class BaseMetric(override val name: String, override val function: FitnessFuncti
      *
      * @property cases The expected input-output cases.
      * @property outputs The predicted outputs of a program.
+     * @property programLength The length of the program being evaluated (unused).
      */
     override fun fitness(cases: Cases, outputs: Outputs, programLength: Int): Double {
         return this.function(cases, outputs)
     }
 }
 
+/**
+ * Provides a way of measuring the fitness of a set of outputs with a penalty for parsimony pressure.
+ *
+ * @property parsimonyCoefficient A coefficient that is used to penalise solutions based on their length.
+ */
 class ParsimonyAwareMetric(
         override val name: String,
         override val function: FitnessFunction,
@@ -69,8 +86,13 @@ class ParsimonyAwareMetric(
     /**
      * Evaluates the fitness based on a set of cases and a set of outputs.
      *
+     * The raw fitness will be penalised with by a small factor based on the program's length:
+     *
+     * fitness = [function] - ([parsimonyCoefficient] * [programLength])
+     *
      * @property cases The expected input-output cases.
      * @property outputs The predicted outputs of a program.
+     * @property programLength The length of the program being evaluated.
      */
     override fun fitness(cases: Cases, outputs: Outputs, programLength: Int): Double {
         val fitness = this.function(cases, outputs)
@@ -79,8 +101,14 @@ class ParsimonyAwareMetric(
     }
 }
 
-
+/**
+ * A collection of standard fitness functions as metrics.
+ */
 object FitnessFunctions {
+
+    /**
+     * Sum of squared errors.
+     */
     val sse = BaseMetric(
         name = "SSE",
         function = { cases, outputs ->
@@ -90,6 +118,9 @@ object FitnessFunctions {
         }
     )
 
+    /**
+     * Mean squared error.
+     */
     val mse = BaseMetric(
         name = "MSE",
         function = { cases, outputs ->
@@ -101,6 +132,9 @@ object FitnessFunctions {
         }
     )
 
+    /**
+     * Mean absolute error.
+     */
     val mae = BaseMetric(
         name = "MAE",
         function = { cases, outputs ->
@@ -112,6 +146,9 @@ object FitnessFunctions {
         }
     )
 
+    /**
+     * Mean squared error with parsimony pressure.
+     */
     val parsimonyAwareMse = ParsimonyAwareMetric(
         name = "MSE (parsimony aware)",
         parsimonyCoefficient = 0.001,

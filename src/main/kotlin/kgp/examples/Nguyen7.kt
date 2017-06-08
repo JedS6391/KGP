@@ -8,7 +8,14 @@ import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
 
-
+/**
+ * The Nguyen-7 problem as given by White et al. (2013).
+ *
+ * **See Also**
+ *
+ * - [White et al.  (2013)](http://link.springer.com/10.1007/s10710-012-9177-2)
+ * - [Nguyen 7](http://kgp.readthedocs.io/en/latest/examples.html#nguyen-7)
+ */
 class Nguyen7 {
 
     companion object Main {

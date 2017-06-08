@@ -11,6 +11,15 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.util.*
 
+/**
+ * The quartic polynomial regression problem for KGP to solve.
+ *
+ * The target function is `x^4 + x^3 + x^2 + x`.
+ *
+ * **See Also**
+ *
+ * - [Quartic Polynomial](http://kgp.readthedocs.io/en/latest/examples.html#quartic-polynomial)
+ */
 class QuarticPolynomial {
 
     companion object Main {

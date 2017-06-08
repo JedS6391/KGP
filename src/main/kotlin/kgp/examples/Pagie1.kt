@@ -8,7 +8,14 @@ import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.IntervalSequenceGenerator
 
-
+/**
+ * The Pagie-1 problem as given by White et al. (2013).
+ *
+ * **See Also**
+ *
+ * - [White et al.  (2013)](http://link.springer.com/10.1007/s10710-012-9177-2)
+ * - [Pagie 1](http://kgp.readthedocs.io/en/latest/examples.html#pagie-1)
+ */
 class Pagie1 {
 
     companion object Main {

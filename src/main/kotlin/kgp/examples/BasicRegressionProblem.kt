@@ -8,6 +8,15 @@ import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
 
+/**
+ * A basic regression problem for KGP to solve.
+ *
+ * The target function is `x0^2 - x1^2 + x1 - 1`.
+ *
+ * **See Also**
+ *
+ * - [Basic Regression Problem](http://kgp.readthedocs.io/en/latest/examples.html#basic-regression-problem)
+ */
 class BasicRegressionProblem {
 
     companion object Main {

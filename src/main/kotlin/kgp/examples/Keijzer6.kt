@@ -8,6 +8,14 @@ import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.IntervalSequenceGenerator
 
+/**
+ * The Keijzer-6 problem as given by White et al. (2013).
+ *
+ * **See Also**
+ *
+ * - [White et al.  (2013)](http://link.springer.com/10.1007/s10710-012-9177-2)
+ * - [Keijzer 6](http://kgp.readthedocs.io/en/latest/examples.html#keijzer-6)
+ */
 class Keijzer6 {
 
     companion object Main {

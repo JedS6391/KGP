@@ -9,7 +9,14 @@ import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
 import java.util.*
 
-
+/**
+ * The Korns-12 problem as given by White et al. (2013).
+ *
+ * **See Also**
+ *
+ * - [White et al.  (2013)](http://link.springer.com/10.1007/s10710-012-9177-2)
+ * - [Korns 12](http://kgp.readthedocs.io/en/latest/examples.html#korns-12)
+ */
 class Korns12 {
 
     companion object Main {

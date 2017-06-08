@@ -3,7 +3,6 @@ package kgp.evolution
 import kgp.fitness.Cases
 import kgp.fitness.Feature
 import kgp.fitness.Metric
-import kgp.fitness.ParsimonyAwareMetric
 import kgp.tree.Function
 import kgp.tree.Tree
 import kgp.tree.TreeGenerator
