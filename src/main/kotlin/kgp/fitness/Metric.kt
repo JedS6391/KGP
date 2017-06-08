@@ -37,6 +37,7 @@ typealias Cases = List<Case>
 typealias FitnessFunction = (Cases, Outputs) -> Double
 
 interface Metric {
+    val name: String
     val function: FitnessFunction
 
     fun fitness(cases: Cases, outputs: Outputs, programLength: Int): Double
@@ -47,7 +48,7 @@ interface Metric {
  *
  * @param function A fitness function that this metric will use.
  */
-class BaseMetric(override val function: FitnessFunction) : Metric {
+class BaseMetric(override val name: String, override val function: FitnessFunction) : Metric {
 
     /**
      * Evaluates the fitness based on a set of cases and a set of outputs.
@@ -60,7 +61,10 @@ class BaseMetric(override val function: FitnessFunction) : Metric {
     }
 }
 
-class ParsimonyAwareMetric(override val function: FitnessFunction, val parsimonyCoefficient: Double) : Metric {
+class ParsimonyAwareMetric(
+        override val name: String,
+        override val function: FitnessFunction,
+        val parsimonyCoefficient: Double) : Metric {
 
     /**
      * Evaluates the fitness based on a set of cases and a set of outputs.
@@ -77,29 +81,39 @@ class ParsimonyAwareMetric(override val function: FitnessFunction, val parsimony
 
 
 object FitnessFunctions {
-    val sse = BaseMetric(function = { cases, outputs ->
-        cases.zip(outputs).map { (expected, predicted) ->
-            Math.pow((predicted - expected.output), 2.0)
-        }.sum()
-    })
+    val sse = BaseMetric(
+        name = "SSE",
+        function = { cases, outputs ->
+            cases.zip(outputs).map { (expected, predicted) ->
+                Math.pow((predicted - expected.output), 2.0)
+            }.sum()
+        }
+    )
 
-    val mse = BaseMetric(function = { cases, outputs ->
-        val sse = cases.zip(outputs).map { (expected, predicted) ->
-            Math.pow((predicted - expected.output), 2.0)
-        }.sum()
+    val mse = BaseMetric(
+        name = "MSE",
+        function = { cases, outputs ->
+            val sse = cases.zip(outputs).map { (expected, predicted) ->
+                Math.pow((predicted - expected.output), 2.0)
+            }.sum()
 
-        ((1.0 / cases.size.toDouble()) * sse)
-    })
+            ((1.0 / cases.size.toDouble()) * sse)
+        }
+    )
 
-    val mae = BaseMetric(function = { cases, outputs ->
-        val ae = cases.zip(outputs).map { (expected, predicted) ->
-            Math.abs(predicted - expected.output)
-        }.sum()
+    val mae = BaseMetric(
+        name = "MAE",
+        function = { cases, outputs ->
+            val ae = cases.zip(outputs).map { (expected, predicted) ->
+                Math.abs(predicted - expected.output)
+            }.sum()
 
-        ((1.0 / cases.size.toDouble()) * ae)
-    })
+            ((1.0 / cases.size.toDouble()) * ae)
+        }
+    )
 
     val parsimonyAwareMse = ParsimonyAwareMetric(
+        name = "MSE (parsimony aware)",
         parsimonyCoefficient = 0.001,
         function = { cases, outputs ->
             val sse = cases.zip(outputs).map { (expected, predicted) ->

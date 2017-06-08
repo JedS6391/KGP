@@ -55,14 +55,6 @@ class BasicRegressionProblem {
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
-            val mae = BaseMetric(function = { cases, outputs ->
-                val ae = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.abs(predicted - expected.output)
-                }.sum()
-
-                ((1.0 / cases.size.toDouble()) * ae)
-            })
-
             val evoOptions = EvolutionOptions(
                     populationSize = 1000,
                     generations = 500,

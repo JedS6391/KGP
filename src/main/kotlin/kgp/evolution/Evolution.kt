@@ -106,7 +106,41 @@ data class EvolutionOptions(
          * of generations given has been reached.
          */
         val stoppingThreshold: Double
-)
+) {
+
+    override fun toString(): String {
+        val buffer = StringBuilder()
+
+        buffer.append("Population Size: ${this.populationSize}\n")
+        buffer.append("Generations: ${this.generations}\n")
+        buffer.append("Tournament Size: ${this.tournamentSize}\n")
+        buffer.append("Stopping Threshold: ${this.stoppingThreshold}\n")
+        buffer.append("Crossover Rate: ${this.crossoverRate}\n")
+        buffer.append("Subtree Mutation Rate: ${this.subtreeMutationRate}\n")
+        buffer.append("Hoist Mutation Rate: ${this.hoistMutationRate}\n")
+        buffer.append("Point Mutation Rate: ${this.pointMutationRate}\n")
+        buffer.append("Point Replacement Rate: ${this.pointReplacementRate}\n")
+        buffer.append("Number of Offspring: ${this.numOffspring}\n")
+        buffer.append("Function Set: [")
+
+        this.functionSet.mapIndexed { idx, function ->
+            buffer.append(function.representation)
+
+            if (idx != this.functionSet.lastIndex)
+                buffer.append(", ")
+        }
+
+        buffer.append("]\n")
+        buffer.append("Tree Initialistation Method: ${this.treeGeneratorOptions.mode}\n")
+        buffer.append("Max Depth: ${this.treeGeneratorOptions.maxDepth}\n")
+        buffer.append("Number of Features: ${this.treeGeneratorOptions.numFeatures}\n")
+        buffer.append("Constants: ${this.treeGeneratorOptions.constants}\n")
+        buffer.append("Fitness Function: ${this.metric.name}\n")
+
+        return buffer.toString()
+    }
+
+}
 
 /**
  * A base model for evolving trees.
@@ -145,6 +179,8 @@ class BaseModel(val options: EvolutionOptions) : Model {
      * @param cases A set of input-output cases.
      */
     override fun train(cases: Cases) {
+        println(this.options)
+
         // Make sure we've got an initial population.
         this.initialise()
 
