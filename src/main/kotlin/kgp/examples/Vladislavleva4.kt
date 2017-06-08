@@ -68,14 +68,6 @@ class Vladislavleva4 {
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
-            val mse = Metric(function = { cases, outputs ->
-                val se = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.pow((predicted - expected.output), 2.0)
-                }.sum()
-
-                ((1.0 / cases.size.toDouble()) * se)
-            })
-
             val evoOptions = EvolutionOptions(
                     populationSize = 500,
                     generations = 100,
@@ -88,7 +80,7 @@ class Vladislavleva4 {
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = mse,
+                    metric = FitnessFunctions.mse,
                     stoppingThreshold = 0.01
             )
 

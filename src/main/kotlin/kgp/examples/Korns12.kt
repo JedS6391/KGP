@@ -67,27 +67,19 @@ class Korns12 {
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
-            val mse = Metric(function = { cases, outputs ->
-                val se = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.pow((predicted - expected.output), 2.0)
-                }.sum()
-
-                ((1.0 / cases.size.toDouble()) * se)
-            })
-
             val evoOptions = EvolutionOptions(
                     populationSize = 100,
-                    generations = 100,
+                    generations = 50,
                     tournamentSize = 20,
                     crossoverRate = 0.7,
                     subtreeMutationRate = 0.1,
-                    hoistMutationRate = 0.05,
+                    hoistMutationRate = 0.3,
                     pointMutationRate = 0.1,
                     pointReplacementRate = 0.05,
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = mse,
+                    metric = FitnessFunctions.mse,
                     stoppingThreshold = 0.01
             )
 

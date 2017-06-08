@@ -7,7 +7,6 @@ import kgp.evolution.EvolutionOptions
 import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.UniformlyDistributedSequenceGenerator
-import java.util.*
 
 
 class Nguyen7 {
@@ -20,8 +19,6 @@ class Nguyen7 {
                     Nodes.Subtraction(),
                     Nodes.Multiplication(),
                     Nodes.Division(),
-                    Nodes.Sine(),
-                    Nodes.Cosine(),
                     CustomOperations.Exponent(),
                     CustomOperations.NaturalLog()
             ).toList()
@@ -58,17 +55,9 @@ class Nguyen7 {
             val genOptions = TreeGeneratorOptions(
                     maxDepth = 5,
                     numFeatures = 1,
-                    constants = listOf(Random().nextDouble()),
+                    constants = listOf(1.0, 2.0),
                     mode = TreeGenerationMode.HalfAndHalf
             )
-
-            val mse = Metric(function = { cases, outputs ->
-                val se = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.pow((predicted - expected.output), 2.0)
-                }.sum()
-
-                ((1.0 / cases.size.toDouble()) * se)
-            })
 
             val evoOptions = EvolutionOptions(
                     populationSize = 500,
@@ -82,7 +71,7 @@ class Nguyen7 {
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = mse,
+                    metric = FitnessFunctions.mse,
                     stoppingThreshold = 0.01
             )
 

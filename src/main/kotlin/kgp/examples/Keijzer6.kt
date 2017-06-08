@@ -52,8 +52,8 @@ class Keijzer6 {
             )
 
             val evoOptions = EvolutionOptions(
-                    populationSize = 1000,
-                    generations = 100,
+                    populationSize = 500,
+                    generations = 100   ,
                     tournamentSize = 20,
                     crossoverRate = 0.7,
                     subtreeMutationRate = 0.1,

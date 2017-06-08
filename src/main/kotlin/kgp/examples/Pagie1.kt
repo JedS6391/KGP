@@ -7,8 +7,6 @@ import kgp.evolution.EvolutionOptions
 import kgp.fitness.*
 import kgp.tree.Nodes
 import kgp.utilities.IntervalSequenceGenerator
-import kgp.utilities.UniformlyDistributedSequenceGenerator
-import java.util.*
 
 
 class Pagie1 {
@@ -59,17 +57,9 @@ class Pagie1 {
             val genOptions = TreeGeneratorOptions(
                     maxDepth = 5,
                     numFeatures = 2,
-                    constants = listOf(Random().nextDouble()),
+                    constants = listOf(1.0, 4.0),
                     mode = TreeGenerationMode.HalfAndHalf
             )
-
-            val mse = Metric(function = { cases, outputs ->
-                val se = cases.zip(outputs).map { (expected, predicted) ->
-                    Math.pow((predicted - expected.output), 2.0)
-                }.sum()
-
-                ((1.0 / cases.size.toDouble()) * se)
-            })
 
             val evoOptions = EvolutionOptions(
                     populationSize = 500,
@@ -83,7 +73,7 @@ class Pagie1 {
                     numOffspring = 10,
                     functionSet = functions,
                     treeGeneratorOptions = genOptions,
-                    metric = mse,
+                    metric = FitnessFunctions.mse,
                     stoppingThreshold = 0.01
             )
 

@@ -51,11 +51,11 @@ class BasicRegressionProblem {
             val genOptions = TreeGeneratorOptions(
                     maxDepth = 5,
                     numFeatures = 2,
-                    constants = listOf(0.0, 1.0, 2.0),
+                    constants = listOf(-1.0, 0.0, 1.0),
                     mode = TreeGenerationMode.HalfAndHalf
             )
 
-            val mae = Metric(function = { cases, outputs ->
+            val mae = BaseMetric(function = { cases, outputs ->
                 val ae = cases.zip(outputs).map { (expected, predicted) ->
                     Math.abs(predicted - expected.output)
                 }.sum()
@@ -65,7 +65,7 @@ class BasicRegressionProblem {
 
             val evoOptions = EvolutionOptions(
                     populationSize = 1000,
-                    generations = 1000,
+                    generations = 500,
                     tournamentSize = 20,
                     crossoverRate = 0.7,
                     subtreeMutationRate = 0.1,
