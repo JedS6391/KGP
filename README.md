@@ -1,6 +1,6 @@
 # KGP
 
-[![Documentation Status](https://readthedocs.org/projects/kgp/badge/)](https://kgp.readthedocs.io/en/latest/)
+[![Documentation Status](https://readthedocs.org/projects/kgp/badge/)](https://kgp.readthedocs.io/en/latest)
 
 *Genetic Programming framework for Kotlin.*
 
@@ -10,7 +10,7 @@ KGP provides an implementation of tree-based genetic programming for the Kotlin 
 
 KGP can be used to solve Symbolic Regression problems and features full interoperability with other JVM languages.
 
-A guide describing the concepts of the system as well as high level usage instructions can be found [here](https://kgp.readthedocs.io/en/latest/).
+A guide describing the concepts of the system as well as high level usage instructions can be found [here](https://kgp.readthedocs.io/en/latest).
 
 Documentation for the API can be viewed [here](https://jeds6391.github.io/KGP/api/html/index.html) for the technically minded.
 
@@ -166,7 +166,7 @@ Generation #100  Best Fitness: 0.012758801796382654  Best Length: 34
 
 ### Defining a problem
 
-Defining your own problems is as simple as following the [usage guide](http://kgp.readthedocs.io/en/latest/usage.html/) from the documentation and including the right packages where necessary. 
+Defining your own problems is as simple as following the [usage guide](http://kgp.readthedocs.io/en/latest/usage.html) from the documentation and including the right packages where necessary. 
 
 The JAR can be built against using the standard Java compiler as follows:
 
