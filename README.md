@@ -28,7 +28,7 @@ The examples can be run from the command-line with the following command:
 java -cp KGP-1.0-SNAPSHOT.jar kgp.examples.<PROBLEM>
 ```
 
-where `<PROBLEM>`` is one of the problems given below:
+where `<PROBLEM>` is one of the problems given below:
 
 - BasicRegressionProblem
 - QuarticPolynomial
